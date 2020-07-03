@@ -58,9 +58,6 @@ RUN curl -fSL -A "Mozilla/4.0" -o /tmp/packs-installer "http://packs.download.mi
  && rm /tmp/packs-installer
 
 # Add MPLABX build scripts
-ADD mplabxBuildAll.py /usr/bin
 ADD mplabxBuildProject.py /usr/bin
-ADD mplabx-make-warnings-into-errors /usr/bin
 
-RUN ln -s /usr/bin/mplabxBuildAll.py /usr/bin/mplabx-build-all
-RUN ln -s /usr/bin/mplabxBuildProject.py /usr/bin/mplabx-build-project
+RUN ln -s -f /usr/bin/mplabxBuildProject.py /usr/bin/mplabx-build-project
