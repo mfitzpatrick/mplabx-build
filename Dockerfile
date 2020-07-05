@@ -28,7 +28,7 @@ RUN apt update \
  && pip install --upgrade pip
 RUN pip install glob2
 
-# Download and install XC32 compiler
+# Download and install XC8 compiler
 RUN curl -fSL -A "Mozilla/4.0" -o /tmp/xc8.run "http://ww1.microchip.com/downloads/en/DeviceDoc/xc8-v2.10-full-install-linux-installer.run" \
     && chmod a+x /tmp/xc8.run \
     && /tmp/xc8.run --mode unattended --unattendedmodeui none \
