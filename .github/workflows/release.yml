@@ -1,0 +1,29 @@
+# Build the docker image and push to github container registry
+
+name: Release
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Use the shell to generate custom environment variables that cannot be
+      # natively configured in this YAML file
+      - name: Build custom env
+        id: custom_env
+        run: |
+            echo "TAGNAME=$(basename ${{ github.ref }})" >> $GITHUB_ENV
+
+      - name: Build image
+        run: docker build -t $TAGNAME .
+
+      - name: Push image
+        run: docker push ghcr.io/mfitzpatrick/mplabx-build:$TAGNAME
+
