@@ -21,3 +21,10 @@ To build your firmware, add it as a volume to the docker container when it is ru
 ```
 docker run --rm -v $PWD:/pic mpfitzpatrick/mplabx-build
 ```
+
+# Releases
+Docker Hub has recently changed its policy and stopped automated builds linked to open-source
+repositories from working by default. For simplicity, this has now been moved over to Github
+Container Registry. Follow the link to the github repository, and search for updated images
+in the releases section.
+

@@ -22,8 +22,8 @@ jobs:
             echo "TAGNAME=$(basename ${{ github.ref }})" >> $GITHUB_ENV
 
       - name: Build image
-        run: docker build -t $TAGNAME .
+        run: docker build -t ghcr.io/mfitzpatrick/mplabx-build:${{ env.TAGNAME }} .
 
       - name: Push image
-        run: docker push ghcr.io/mfitzpatrick/mplabx-build:$TAGNAME
+        run: docker push ghcr.io/mfitzpatrick/mplabx-build:${{ env.TAGNAME }}
 
