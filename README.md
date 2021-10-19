@@ -12,9 +12,9 @@ https://hub.docker.com/r/dataspeedinc/mplabx
 It has been modified to support the XC8 compiler.
 
 ## Getting Started
-This docker image is available on docker hub.
+This docker image is available on github container registry.
 ```
-docker pull mpfitzpatrick/mplabx-build:latest
+docker pull ghcr.io/mfitzpatrick/mplabx-build:<tag name>
 ```
 
 To build your firmware, add it as a volume to the docker container when it is run:
