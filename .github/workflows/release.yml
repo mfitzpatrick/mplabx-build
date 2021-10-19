@@ -1,0 +1,32 @@
+# Build the docker image and push to github container registry
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Use the shell to generate custom environment variables that cannot be
+      # natively configured in this YAML file
+      - name: Build custom env
+        id: custom_env
+        run: |
+            echo "TAGNAME=$(basename ${{ github.ref }})" >> $GITHUB_ENV
+
+      - name: Build image
+        run: docker build -t ghcr.io/${{ github.repository }}:${{ env.TAGNAME }} .
+
+      - name: Login to github container registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        run: docker push ghcr.io/${{ github.repository }}:${{ env.TAGNAME }}
+
