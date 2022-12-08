@@ -51,9 +51,13 @@ def generateMakefile(mplabx_version, project_folder):
 
 def buildMakefile(project_folder, makefile):
   # Relocalize makefile location.
+  result = makefile.find('CAT2')
+  extra_cmd="MP_EXTRA_CC_PRE+="
+  if result != -1:
+    extra_cmd = "MP_EXTRA_CC_PRE+=-D CAT2"
   makefile_local = makefile.replace(project_folder, "./")
   nproc = subprocess.check_output(["nproc"])
-  cmds = ["make", "-j", str(int(nproc)), "-f", makefile_local, "VERBOSE=1", "SUBPROJECTS=", ".build-conf"]
+  cmds = ["make", "-j", str(int(nproc)), "-f", makefile_local, extra_cmd, "VERBOSE=1", "SUBPROJECTS=", ".build-conf"]
   print("  "+" ".join(cmds)) # Print the command.
   process = subprocess.Popen(cmds, cwd=project_folder)
   process.communicate()
